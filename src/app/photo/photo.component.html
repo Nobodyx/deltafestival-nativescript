@@ -1,0 +1,35 @@
+<ActionBar class="action-bar">
+    <!-- 
+    Use the NavigationButton as a side-drawer button in Android
+    because ActionItems are shown on the right side of the ActionBar
+    -->
+    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+    <!-- 
+    Use the ActionItem for IOS with position set to left. Using the
+    NavigationButton as a side-drawer button in iOS is not possible,
+    because its function is to always navigate back in the application.
+    -->
+    <ActionItem icon="res://navigation/menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()"
+        ios.position="left">
+    </ActionItem>
+    <Label class="action-bar-title" text="Carte"></Label>
+</ActionBar>
+
+<GridLayout rows="auto,auto, *, auto, auto, auto">
+    <custom-action-bar [row]="0" title="Préparation de la publication"></custom-action-bar>
+	<StackLayout orientation="horizontal" row="1" padding="10">		
+        <Switch [(ngModel)]="sauvegarder"></Switch>
+        <Label text="Enregistrer dans vos photos." class="label"></Label>
+	</StackLayout>
+    <Image row="2" [src]="cameraImage"  margin="10"></Image>
+    <StackLayout class="input-field" row="3" padding="10">
+        <Label class="h3" text="Hashtag:" class="label"></Label>
+        <TextView hint="Choisir un # ..." class="input input-border"></TextView>
+    </StackLayout>
+    <Button class="btn btn-primary" [class.button-active]="!isTaked" [class.button]="isTaked" text="Prendre une photo" (tap)="onTakePictureTap($event)" row="4" padding="10"></Button>
+    <Button class="btn btn-primary" [class.button-active]="isTaked" [class.button]="!isTaked" text="Envoyer" (tap)="send()" row="5" padding="10"></Button>
+  
+</GridLayout>
+
+<!-- <GridLayout rows="auto,auto, *, auto, auto, auto">
+</GridLayout> -->
